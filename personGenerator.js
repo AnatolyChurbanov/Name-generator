@@ -50,7 +50,83 @@ const personGenerator = {
             "id_10": "Виктория"
         }
     }`,
+
+    middleNameJson: `{
+        "count": 16,
+        "list": {
+            "id_1": "Иванович",
+            "id_2": "Алексеевич",
+            "id_3": "Анатольевич",
+            "id_4": "Васильевич",
+            "id_5": "Петрович",
+            "id_6": "Михайлович",
+            "id_7": "Сергеевич",
+            "id_8": "Федорович",
+            "id_9": "Александрович",
+            "id_10": "Николаевич",
+            "id_11": "Семёнович",
+            "id_12": "Вячеславович",
+            "id_13": "Степанович",
+            "id_14": "Павлович",
+            "id_15": "Григорьевич",
+            "id_16": "Борисович"
+        }
+    }`,
+
+    monthBirthJson: `{
+        "count": 12,
+        "list": {
+            "id_1": "Января",
+            "id_2": "Февраля",
+            "id_3": "Марта",
+            "id_4": "Апреля",
+            "id_5": "Мая",
+            "id_6": "Июня",
+            "id_7": "Июля",
+            "id_8": "Августа",
+            "id_9": "Сентября",
+            "id_10": "Октября",
+            "id_11": "Ноября",
+            "id_12": "Декабря"
+        }
+    }`,
     
+    maleJobJson: `{
+        "count": 12,
+        "list": {
+            "id_1": "Дальнобойщик",
+            "id_2": "Грузчик",
+            "id_3": "Шахтер",
+            "id_4": "Сварщик",
+            "id_5": "Слесарь",
+            "id_6": "Электромонтажник",
+            "id_7": "Инженер-строитель",
+            "id_8": "Вахтовик-нефтянник",
+            "id_9": "Автомонтажник",
+            "id_10": "Пожарный",
+            "id_11": "Спасатель",
+            "id_12": "Военный сапер"
+        }
+    }`,
+
+    femaleJobJson: `{
+        "count": 12,
+        "list": {
+            "id_1": "Повар",
+            "id_2": "Няня",
+            "id_3": "Сиделка",
+            "id_4": "Медсестра",
+            "id_5": "Хостес",
+            "id_6": "Уборщица",
+            "id_7": "Секретарь",
+            "id_8": "Кондитер",
+            "id_9": "Бариста",
+            "id_10": "Работница call-центра",
+            "id_11": "Модель",
+            "id_12": "Фотограф"
+        }
+    }`,
+
     GENDER_MALE: 'Мужчина',
     GENDER_FEMALE: 'Женщина',
 
@@ -95,13 +171,56 @@ const personGenerator = {
 
     },
 
-   
+// Генерация отчества
+
+     randimMiddleName: function() {
+        if (this.person.gender == this.GENDER_FEMALE) {
+            return (this.randomValue(this.middleNameJson).replace('ич', 'на'));
+        } else {
+            return (this.randomValue(this.middleNameJson));
+        }
+     },
+     
+
+// Генерация даты рождения
+
+    randomBirthDate: function() {
+        let month = this.randomValue(this.monthBirthJson);
+        let day;
+        if (month === "Февраля") {
+            day = this.randomIntNumber (28, 1);
+        }
+        else if (month === "Апрель" || "Июнь" || "Сентябрь" || "Ноябрь") {
+            day = this.randomIntNumber  (30, 1);
+        } else {
+            day = this.randomIntNumber  (31, 1);
+        }
+        return day + ' ' + month;
+    },
+
+    randomBirthYear: function () {
+        return this.randomIntNumber (2010, 1970) + ' ' + 'года';
+    },
+    
+// Генерация профессии
+
+    randomJob: function() {
+        if (this.person.gender == this.GENDER_FEMALE) {
+            return (this.randomValue(this.femaleJobJson));
+        } else {
+            return (this.randomValue(this.maleJobJson));
+        }
+    },
 
     getPerson: function () {
         this.person = {};
         this.person.gender = this.randomGender();
         this.person.surname = this.randomSurname();
         this.person.firstName = this.randomFirstName();
+        this.person.middleName = this.randimMiddleName();
+        this.person.birthDate = this.randomBirthDate();
+        this.person.birthYear = this.randomBirthYear();
+        this.person.job = this.randomJob();
         return this.person;
     }
 };
