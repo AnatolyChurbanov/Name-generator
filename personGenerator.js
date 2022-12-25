@@ -199,7 +199,7 @@ const personGenerator = {
     },
 
     randomBirthYear: function () {
-        return this.randomIntNumber (2010, 1970) + ' ' + 'года';
+        return this.randomIntNumber (2000, 1970) + ' ' + 'года';
     },
     
 // Генерация профессии
