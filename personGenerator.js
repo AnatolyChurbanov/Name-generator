@@ -27,12 +27,12 @@ const personGenerator = {
             "id_2": "Максим",
             "id_3": "Иван",
             "id_4": "Артем",
-            "id_5": "Дмитрий",
-            "id_6": "Никита",
+            "id_5": "Виктор",
+            "id_6": "Владимир",
             "id_7": "Михаил",
             "id_8": "Даниил",
             "id_9": "Егор",
-            "id_10": "Андрей"
+            "id_10": "Вячеслав"
         }
     }`,
     firstNameFemaleJson: `{
@@ -48,28 +48,6 @@ const personGenerator = {
             "id_8": "Анастасия",
             "id_9": "Елена",
             "id_10": "Виктория"
-        }
-    }`,
-
-    middleNameJson: `{
-        "count": 16,
-        "list": {
-            "id_1": "Иванович",
-            "id_2": "Алексеевич",
-            "id_3": "Анатольевич",
-            "id_4": "Васильевич",
-            "id_5": "Петрович",
-            "id_6": "Михайлович",
-            "id_7": "Сергеевич",
-            "id_8": "Федорович",
-            "id_9": "Александрович",
-            "id_10": "Николаевич",
-            "id_11": "Семёнович",
-            "id_12": "Вячеславович",
-            "id_13": "Степанович",
-            "id_14": "Павлович",
-            "id_15": "Григорьевич",
-            "id_16": "Борисович"
         }
     }`,
 
@@ -173,11 +151,11 @@ const personGenerator = {
 
 // Генерация отчества
 
-     randimMiddleName: function() {
+     randomMiddleName: function() {
         if (this.person.gender == this.GENDER_FEMALE) {
-            return (this.randomValue(this.middleNameJson).replace('ич', 'на'));
+            return (this.randomValue(this.firstNameMaleJson) + "овна");
         } else {
-            return (this.randomValue(this.middleNameJson));
+            return (this.randomValue(this.firstNameMaleJson) + "ович");
         }
      },
      
@@ -217,7 +195,7 @@ const personGenerator = {
         this.person.gender = this.randomGender();
         this.person.surname = this.randomSurname();
         this.person.firstName = this.randomFirstName();
-        this.person.middleName = this.randimMiddleName();
+        this.person.middleName = this.randomMiddleName();
         this.person.birthDate = this.randomBirthDate();
         this.person.birthYear = this.randomBirthYear();
         this.person.job = this.randomJob();
